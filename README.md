@@ -1,2 +1,2 @@
 # LFA
-proiecte LFA`xasda`
+proiecte LFA
