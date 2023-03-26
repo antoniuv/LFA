@@ -29,7 +29,8 @@ if cuv=='vid':
     if stare_curenta in stari_finale:
         print("acceptat")
         print("->", end='')
-        print(stare_curenta)
+        print(stare_curenta, end='')
+        print("->")
     else:
         print("respins")
 else:
