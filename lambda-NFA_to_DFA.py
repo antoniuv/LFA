@@ -1,6 +1,6 @@
 nfa={}
 transitions = []
-with open('fisierintrare.txt') as file:
+with open('fisierintrare2.txt') as file:
     stare_initiala = file.readline().replace('\n', '')
     stari_finale = file.readline().replace('\n', '').split()
     for line in file:
@@ -30,7 +30,6 @@ def lambda_closure(stari, nfa):
                 queue.append(next_state)
     return sorted(l_closure)
 
-# Convert the NFA to a DFA
 start_state = sorted(lambda_closure(['q0'], nfa))
 dfa_states = [start_state]
 dfa_transition = {}
@@ -45,7 +44,6 @@ while queue:
             queue.append(lambda_states)
         dfa_transition.setdefault(tuple(current_state), {})[transition] = tuple(lambda_states)
 
-# Print the resulting DFA
 print('DFA Transition Table:')
 print(' '.center(len(max(dfa_states))*4),end='|')
 for x in transitions:
@@ -55,5 +53,10 @@ for i in range(len(max(dfa_states))):
     print('-------------', end='')
 print()
 for state in dfa_states:
-    print('{:2s} | {:2s} | {:2s} | {:2s}'.format(','.join(state), ','.join(dfa_transition.get(tuple(state), {}).get('0', [])), ','.join(dfa_transition.get(tuple(state), {}).get('1', [])), ','.join(dfa_transition.get(tuple(state), {}).get('2', []))))
-
+    if len(state) != 0:
+        print('{:2s} | {:2s} | {:2s} | {:2s}'.format(','.join(state), ','.join(dfa_transition.get(tuple(state), {}).get('a', [])), ','.join(dfa_transition.get(tuple(state), {}).get('b', [])), ','.join(dfa_transition.get(tuple(state), {}).get('c', []))))
+print("stari_finale:")
+for stare in stari_finale:
+    for stare2 in dfa_states:
+        if str(stare) in stare2:
+            print(*stare2, sep=',')
