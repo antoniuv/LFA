@@ -24,14 +24,19 @@ for cuvant in cuvinte:
         if len(cuvant_posibil) > len(cuvant) + 2 :
             print('neacceptat')
             break
-
-        if cuvant == cuvant_posibil[:-1] and 'lambda' in grammar[cuvant_posibil[-1]]:
-            print('acceptat')
-            break
-        else:
-            for productie in grammar[cuvant_posibil[-1]]:
-                if productie != 'lambda':
-                    cuvinte_posibile.append((cuvant_posibil[:-1]) + productie)
+        try:
+            if cuvant == cuvant_posibil[:-1] and 'lambda' in grammar[cuvant_posibil[-1]]:
+                print('acceptat')
+                break
+            else:
+                for productie in grammar[cuvant_posibil[-1]]:
+                    if productie != 'lambda':
+                        cuvinte_posibile.append((cuvant_posibil[:-1]) + productie)
+                cuvinte_posibile.pop(0)
+        except KeyError:
+            if cuvant == cuvant_posibil:
+                print('acceptat')
+                break
             cuvinte_posibile.pop(0)
     if cuvinte_posibile == []:
         print('neacceptat')
